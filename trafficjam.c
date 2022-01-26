@@ -14,12 +14,17 @@ void plateau(int tab[6][6]) {
     for(nl=0; nl<6;nl++){
         printf("|");
         for(nc=0; nc<6;nc++){
-            if(tab[nc][nl]!=0)
+            if(tab[nc][nl]!=0){
                 setbgrcolor(tab[nc][nl]);
-            else
+                setfontcolor(tab[nc][nl]);
+            }
+            else{
+                setfontcolor(WHITE);
                 setbgrcolor(BLACK);
+            }
             printf(" □ ");
             setbgrcolor(BLACK);
+            setfontcolor(WHITE);
         }
         if(nl==2)
             printf(">\n");

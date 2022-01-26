@@ -49,11 +49,11 @@ int main(void) {
     clrscr();
     ncars=inittab(tab,cars);
     plateau(tab);
-    printf("\n nombre de coups: %d",ncoups);
     printf("\n selection : \t");
     setbgrcolor(cars[caridx].color);
     printf("□");
     setbgrcolor(BLACK);
+    printf("\n nombre de coups: %d",ncoups);
     char appui=getch();
     while (appui != 'q' && niveau<LEVELMAX+1){
         change=1;
