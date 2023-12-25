@@ -5,13 +5,12 @@
 
 
 int main(void) {
-    setbgrcolor(BLACK);
-    settitle("===TRAFFIC JAM===");
     char user[25];
     int change=0;
     int help=FALSE;
     int is_score=FALSE;
     int ncars;
+    int ncoups2;
     char appui2;
     int ncoups=0;
     carr cars[24];
@@ -22,10 +21,25 @@ int main(void) {
     int gagnant=0;
     int niveau=1;
     score bestscores[2];
+    setbgrcolor(BLACK);
+    switch (menu())
+    {
+    case '2':
+        load_replay(tab_replay,&ncoups2);
+        replay(tab_replay,ncoups2);
+        break;
+    case '3':
+        editeur();
+        break;
+    default:
+        break;
+    }
+    
     get_best_scores(bestscores);
     username(user);
     printf("%s",user);
     resetcolors();
+    settitle("===TRAFFIC JAM===");
     for(int i=0; i<24;i++){
         cars[i].color=BLACK;
         cars[i].x=0;
@@ -35,6 +49,7 @@ int main(void) {
         cars[i].big=0;
     }
     clrscr();
+    gotoxy(10,10);
     printf("Voulez vous charger une partie?(o/n)");
     do{
         touche=getch();
@@ -44,14 +59,27 @@ int main(void) {
             load_level(1,cars);
     }
     else{
-        load_level(1,cars);
+        clrscr();
+        gotoxy(10,10);
+        printf("Voulez vous charger le niveau Editeur ?(o/n)");
+        do{
+            touche=getch();
+        }while (touche!='n' && touche!='o');
+        if(touche=='o'){
+            load_level(21,cars);
+            niveau=0;
+        }
+        else
+            load_level(1,cars);
     }
     clrscr();
     ncars=inittab(tab,cars);
     plateau(tab);
     printf("\n selection : \t");
+    setfontcolor(cars[caridx].color);
     setbgrcolor(cars[caridx].color);
-    printf("□");
+    printf(" □ ");
+    setfontcolor(WHITE);
     setbgrcolor(BLACK);
     printf("\n nombre de coups: %d",ncoups);
     char appui=getch();
@@ -60,6 +88,9 @@ int main(void) {
         switch (appui){
             case 'w':
                 caridx++;
+                break;
+            case 'W':
+                caridx--;
                 break;
             case 'h':
                 hkey(cars,caridx,&ncoups);
@@ -75,6 +106,7 @@ int main(void) {
                 break;
             case 'r':
                 load_level(niveau,cars);
+                reset(tab_replay);
                 ncoups=0;
                 break;
             case 's':
@@ -85,6 +117,12 @@ int main(void) {
                 if(help){
                     clrscr();
                     plateau(tab);
+                    printf("\n selection : \t");
+                    setfontcolor(cars[caridx].color);
+                    setbgrcolor(cars[caridx].color);
+                    printf(" □ ");
+                    setfontcolor(WHITE);
+                    setbgrcolor(BLACK);
                     setfontbold(TRUE);
                     printf("\n nombre de coups: %d",ncoups);
                     setfontbold(FALSE);
@@ -100,6 +138,12 @@ int main(void) {
                 if(is_score){
                     clrscr();
                     plateau(tab);
+                    printf("\n selection : \t");
+                    setfontcolor(cars[caridx].color);
+                    setbgrcolor(cars[caridx].color);
+                    printf(" □ ");
+                    setfontcolor(WHITE);
+                    setbgrcolor(BLACK);
                     setfontbold(TRUE);
                     printf("\n nombre de coups: %d",ncoups);
                     setfontbold(FALSE);
@@ -115,6 +159,8 @@ int main(void) {
         }
         if(caridx==ncars)
             caridx=0;
+        if(caridx==-1)
+            caridx=ncars-1;
         if(change){
             for(int line=0;line<6;line++){
                 for (int col = 0; col < 6; col++)
@@ -128,13 +174,17 @@ int main(void) {
             plateau(tab);
             printf("\n selection : \t");
             setbgrcolor(cars[caridx].color);
-            printf("□");
+            setfontcolor(cars[caridx].color);
+            printf(" □ ");
+            setfontcolor(WHITE);
             setbgrcolor(BLACK);
-            if(help)
-                affhelp(); 
             setfontbold(TRUE);
             printf("\n nombre de coups: %d",ncoups);
             setfontbold(FALSE);
+            if(help)
+                affhelp(); 
+            if(is_score)
+                aff_bestscores(bestscores);
         }
         if(gagnant){
             check_best_score(bestscores,user,ncoups,niveau);
@@ -155,7 +205,7 @@ int main(void) {
                 }   
                 if(appui2=='q')
                     appui=appui2;
-                
+                ncoups2=ncoups;
                 ncoups=0;
             }
             else
@@ -173,12 +223,15 @@ int main(void) {
     }
     else{
         gotoxy(10,10);
+        printf("\n voulez vous sauvegarder la progression ?(o/n)\n");
         do{
-            printf("\n voulez vous sauvegarder la progression ?(o/n)\n");
             touche=getch();
         }while (touche!='n' && touche!='o');
-        if(touche=='o')
+        if(touche=='o'){
+            if(gagnant)
+                save_replay(tab_replay,ncoups2);
             save(cars,niveau);
+        }
     }
     unhidecursor();
     clrscr();

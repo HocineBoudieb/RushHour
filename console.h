@@ -37,6 +37,24 @@
 #define INVERT          7
 #define HIDDEN          8
 
+#define REDRGB "255 0 0"
+#define WHITERGB "255 255 255"
+#define GREENRGB "0 128 0"
+#define BLUERGB "0 0 255"
+#define MAGENTARGB "128 0 128"
+#define YELLOWRGB "255 255 0"
+#define CYANRGB "0 255 255"
+
+#define BREDRGB "255 69 0"
+#define BBLUERGB "16 211 215"
+#define BYELLOWRGB "211 215 16"
+#define BWHITERGB "192 192 192"
+#define BGREENRGB "0 255 0"
+#define BMAGENTARGB "255 0 255"
+
+
+
+
 #define TRUE    1
 #define FALSE   0
 
