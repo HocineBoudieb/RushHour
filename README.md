@@ -34,7 +34,7 @@ gcc main.c -o rush_hour
 - `niveauX.txt`: Directory containing predefined levels.
 - `createcar.c`: Source file for the level editor.
 - `scores.txt`: Source file for the scoreboard.
-- `screenshot.c`: Source file for taking screenshots.
+- `screen.ppm`: screenshots.
 - `README.md`: You're reading it right now!
 
 ## Credits
