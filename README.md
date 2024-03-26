@@ -32,8 +32,8 @@ gcc main.c -o rush_hour
 
 - `main.c`: Main source file containing the game logic.
 - `niveauX.txt`: Directory containing predefined levels.
-- `editor.c`: Source file for the level editor.
-- `scores.c`: Source file for the scoreboard.
+- `createcar.c`: Source file for the level editor.
+- `scores.txt`: Source file for the scoreboard.
 - `screenshot.c`: Source file for taking screenshots.
 - `README.md`: You're reading it right now!
 
