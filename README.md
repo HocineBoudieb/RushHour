@@ -37,14 +37,6 @@ gcc main.c -o rush_hour
 - `screenshot.c`: Source file for taking screenshots.
 - `README.md`: You're reading it right now!
 
-## Compatibility
-
-This game is developed in pure C and should run on any system with a compatible C compiler.
-
-## Contributing
-
-Contributions are welcome! Feel free to fork this repository, make changes, and submit pull requests.
-
 ## Credits
 
 This project is developed by Hocine Boudieb.
